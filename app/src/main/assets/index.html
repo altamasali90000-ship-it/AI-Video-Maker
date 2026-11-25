@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Video Maker</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;padding:18px;background:#090d18;
+color:white;font-family:Arial,sans-serif
+}
+h1{text-align:center;color:#8d7aff}
+p{color:#aab6ce}
+.card{
+background:#171f33;padding:16px;
+border-radius:15px;margin:15px 0;
+border:1px solid #303d59
+}
+label{display:block;margin:14px 0 8px;font-weight:bold}
+textarea,select,input{
+width:100%;padding:13px;border-radius:9px;
+border:1px solid #39445a;background:#0c1425;
+color:white;font-size:15px
+}
+textarea{height:150px}
+button{
+width:100%;padding:15px;border:0;
+border-radius:10px;background:#7655ee;
+color:white;font-size:17px;font-weight:bold
+}
+#preview{max-width:100%;margin-top:12px;display:none}
+#status{white-space:pre-wrap;color:#80e6b0}
+</style>
+</head>
+<body>
+
+<h1>🎬 AI VIDEO MAKER</h1>
+<p style="text-align:center">Create your own AI videos</p>
+
+<div class="card">
+<label>अपनी Script लिखें</label>
+<textarea id="script" placeholder="अपनी Comedy या Story Script यहाँ लिखें..."></textarea>
+
+<label>वीडियो स्टाइल</label>
+<select id="style">
+<option>3D Cartoon</option>
+<option>2D Cartoon</option>
+<option>Realistic Human</option>
+</select>
+
+<label>वीडियो की लंबाई</label>
+<select id="duration">
+<option>1 मिनट</option>
+<option>2 मिनट</option>
+</select>
+
+<label>अपनी आवाज चुनें</label>
+<select id="voice"></select>
+
+<label>वीडियो क्वालिटी</label>
+<select id="quality">
+<option>720p HD</option>
+<option>1080p Full HD</option>
+<option>1440p QHD</option>
+<option>2160p 4K</option>
+</select>
+
+<label>वीडियो फॉर्मेट</label>
+<select id="ratio">
+<option>9:16 Shorts</option>
+<option>16:9 YouTube</option>
+</select>
+
+<label>अपनी फोटो डालें</label>
+<input type="file" id="photo" accept="image/*">
+<img id="preview">
+
+<button onclick="generate()">✨ GENERATE VIDEO</button>
+<p id="status"></p>
+</div>
+
+<script>
+const voice=document.getElementById("voice");
+for(let i=1;i<=100;i++){
+let o=document.createElement("option");
+o.value=i;
+o.textContent="Voice "+i;
+voice.appendChild(o);
+}
+
+document.getElementById("photo").onchange=function(){
+let f=this.files[0];
+if(f){
+let img=document.getElementById("preview");
+img.src=URL.createObjectURL(f);
+img.style.display="block";
+}
+};
+
+function generate(){
+let s=document.getElementById("script").value.trim();
+if(!s){
+alert("पहले Script लिखें");
+return;
+}
+document.getElementById("status").textContent=
+"आपकी वीडियो सेटिंग तैयार है।\n"+
+"Style: "+document.getElementById("style").value+
+"\nVoice: "+voice.value+
+"\nQuality: "+document.getElementById("quality").value+
+"\n\nअसली AI वीडियो बनाने के लिए AI Server कनेक्ट करना बाकी है।";
+}
+</script>
+
+</body>
+</html>
